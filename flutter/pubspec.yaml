@@ -12,9 +12,9 @@ dependencies:
   supabase_flutter: ^2.0.0
 
   # Firebase (online mode)
-    firebase_core: ^3.6.0
+  firebase_core: ^3.6.0
   cloud_firestore: ^5.4.4
-
+  
   # Bluetooth LE scanning (teacher side)
   flutter_blue_plus: ^1.32.12
   # BLE advertising (student side). flutter_blue_plus is central-only and
