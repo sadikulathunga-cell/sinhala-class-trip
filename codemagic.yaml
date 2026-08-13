@@ -1,0 +1,27 @@
+    workflows:
+      android-release:
+        name: Android APK Build
+        instance_type: mac_mini_m1
+        max_build_duration: 60
+        environment:
+          groups:
+            - google_play # not needed but keeps it happy
+        scripts:
+          - name: Install npm dependencies
+            script: |
+              npm install
+              npm run build
+          - name: Install Capacitor
+            script: |
+              npx cap add android
+              npx cap sync android
+          - name: Build Android APK
+            script: |
+              cd android
+              ./gradlew assembleDebug
+        artifacts:
+          - android/app/build/outputs/apk/debug/*.apk
+        publishing:
+          email:
+            recipients:
+              - your_email@gmail.com # optional: sends you the APK link
