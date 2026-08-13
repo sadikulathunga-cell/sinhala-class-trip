@@ -2,18 +2,26 @@ name: Build APK
 on:
   push:
     branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6'
-      - run: flutter pub get
-        working-directory: flutter
-      - run: flutter build apk --release
-        working-directory: flutter
+          flutter-version: '3.22.2'
+          channel: 'stable'
+          
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: flutter  # <-- THIS IS THE KEY LINE
+        
+      - name: Build APK
+        run: flutter build apk --release
+        working-directory: flutter  # <-- AND THIS ONE
+        
       - uses: actions/upload-artifact@v4
         with:
           name: app-release
