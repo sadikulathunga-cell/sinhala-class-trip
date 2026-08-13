@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_core/firebase_core.dart'; // ADD THIS
 import 'login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Start Firebase first
+  await Firebase.initializeApp(); 
+
+  // Start Supabase for login
   await Supabase.initialize(
     url: 'PASTE_YOUR_SUPABASE_URL_HERE',
     anonKey: 'PASTE_YOUR_SUPABASE_ANON_KEY_HERE',
@@ -19,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Class Track',
       debugShowCheckedModeBanner: false,
-      home: LoginPage(), // starts with login
+      home: LoginPage(),
     );
   }
 }
